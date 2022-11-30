@@ -1,0 +1,31 @@
+// 使用proto3的预防
+syntax = "proto3";
+//生成多个类
+option java_multiple_files = false;
+//生成Java类所在包
+option java_package = "com.hu.news.proto";
+//生成外层类类包
+option java_outer_classname = "NewsProto";
+//。proto包名
+package news;
+//定义prc服务routeGuide
+service NewsService{
+    rpc list(NewsRequest) returns (NewsRespose){}
+}
+
+message NewsRequest{
+    string data = 1;
+}
+
+message NewsRespose{
+    //repeated说明是一个集合（数组），数组每一个元素都是News对象
+    repeated News news = 1 ;
+}
+
+//News 新闻实体对象
+message News{
+    int32 id = 1;
+    string total = 2;
+    string content = 3;
+    int64 createTime = 4;
+}
